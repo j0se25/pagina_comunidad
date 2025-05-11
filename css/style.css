@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Linden+Hill:ital@0;1&family=Roboto:ital,wght@0,100..900;1,100..900&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap');
+
+/* Estilos generales */
+* {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+}
+/* Header */
+.img-fluid{
+    align-items: center;
+}
+
+#black-div {
+    background-color: #013f01;
+    text-align: right;
+    padding: 1%;
+}
+
+#black-div a {
+    color: white;
+    padding: 1rem;
+    transition: color 0.3s ease;
+}
+
+#black-div a:hover {
+    color: #FFD700;
+}
+
+#menu-nav {
+    background-color: #005200 !important;
+}
+#menu-nav .nav-link {
+    color: white !important;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+#menu-nav .nav-link:hover {
+    color: #FFD700 !important;
+    transform: translateY(-2px);
+}
+
+#menu-nav .nav-link.active {
+    color: #FFD700 !important; /* Amarillo dorado */
+    font-weight: bold;
+}
+/* Hover para los demás ítems */
+#menu-nav .nav-link:not(.active):hover {
+    color: #FFD700 !important;
+}
+
+
+li > a {
+    color: white;
+    text-decoration: none;
+    padding: 15px 25px;
+    display: inline-block;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+/* Efectos hover del menú */
+li > a:hover {
+    color: #FFD700;
+    transform: translateY(-2px);
+}
+
+li > a::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: #FFD700;
+    transition: all 0.3s ease;
+}
+
+li > a:hover::before {
+    width: 100%;
+    left: 0;
+}
+h2{
+    color: #005200;
+    text-align: center;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+}
+.modal {
+    transform: translateZ(0); /* Acelera renderizado */
+}
+.modal-backdrop {
+    transition: opacity 0.15s linear !important; /* Simplifica la transición */
+}
+/* BOTÓN VOLVER ARRIBA */
+#btnInicio {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #0d6dfdab;
+    border: none;
+    border-radius: 50%;
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: none;
+    z-index: 9999;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+#btnInicio:hover {
+    background: #2b2b2b;
+}
+
+#btnInicio .flecha {
+    width: 20px;
+    height: auto;
+    display: block;
+    margin: auto;
+}
+
+
