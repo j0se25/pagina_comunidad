@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Linden+Hill:ital@0;1&family=Roboto:ital,wght@0,100..900;1,100..900&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap');
+*{
+    font-family: 'Roboto', sans-serif;
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+    padding: 0.5rem;
+    margin: 1rem;
+}
+section{
+    align-content: center;
+    position: relative;
+}
+div > h1{
+color: #005200;
+text-align: center;
+align-items: center;
+}

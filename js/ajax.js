@@ -58,3 +58,7 @@ window.addEventListener('popstate', () => {
 document.addEventListener('DOMContentLoaded', () => {
     setupInternalLinks();
 });
+// Manejar el botón Atrás/Adelante
+window.addEventListener('popstate', () => {
+    loadContent(window.location.pathname);
+});
