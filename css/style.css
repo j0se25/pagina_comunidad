@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Linden+Hill:ital@0;1&family=Roboto:ital,wght@0,100..900;1,100..900&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Linden+Hill:ital@0;1&family=Roboto:ital,wght@0,100..900;1,100..900&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Dancing+Script:wght@400..700&family=Linden+Hill:ital@0;1&family=Roboto:ital,wght@0,100..900;1,100..900&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap');
 /* Estilos generales */
 * {
     padding: 0;
@@ -24,6 +25,21 @@
     color: white;
     padding: 1rem;
     transition: color 0.3s ease;
+}
+
+#tittle{
+    text-decoration: none;
+    list-style: none;
+    font-family: 'Alfa Slab One', sans-serif;
+    color: #013f01;
+}
+
+#preserv{
+    text-decoration: none;
+    list-style: none;
+    font-family: 'Dancing Script', sans-serif;
+    font-size: 22px;
+    color: #013f01;
 }
 
 #black-div a:hover {
