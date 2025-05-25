@@ -386,10 +386,11 @@
     <!-- 3. INICIALIZAR AOS -->
     <script>
         AOS.init({
-            duration: 800,  // Duración por defecto
-            once: true,     // Animar solo una vez
-            offset: 100     // Trigger 100px antes
-        });
+        once: false,    // ¡CLAVE! Permite repetir animaciones
+        mirror: true,   // Anima hacia atrás cuando sales del viewport
+        duration: 800,
+        offset: 100
+});
     </script>
 </body>
 </html>
