@@ -8,20 +8,20 @@ function loadContent(url) {
             const newContent = doc.querySelector('main').innerHTML;
             document.querySelector('main').innerHTML = newContent;
             
-            // Scroll al inicio de la página (agrega esto)
+            // Scroll al inicio de la página
             window.scrollTo({
                 top: 0,
-                behavior: 'smooth' // Efecto suave (opcional)
+                behavior: 'smooth' // Para el efecto suave
             });
             
-            // Resto de tu lógica...
             setupInternalLinks();
             history.pushState({}, '', url);
         })
         .catch(err => console.error('Error al cargar:', err));
 }
 
-// Configurar anclas internas (scroll suave)
+// scroll suave para enlaces internos
+// Función para configurar enlaces internos
 function setupInternalLinks() {
     document.querySelectorAll('a[href^="#"]').forEach(link => {
         link.addEventListener('click', (e) => {

@@ -26,4 +26,73 @@ div > h1{
 color: #005200;
 text-align: center;
 align-items: center;
+
 }
+  /* Estilos del botón de Uiverse.io */
+        .uiverse-button {
+            --color: #560bad;
+            font-family: inherit;
+            display: inline-block;
+            width: 8em;
+            height: 2.6em;
+            line-height: 2.5em;
+            margin: 0;
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            border: 2px solid var(--color);
+            transition: color 0.5s;
+            z-index: 1;
+            font-size: 14px;
+            border-radius: 6px;
+            font-weight: 500;
+            color: var(--color);
+            background: transparent;
+            text-decoration: none;
+        }
+
+        .uiverse-button:before {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            background: var(--color);
+            height: 150px;
+            width: 200px;
+            border-radius: 50%;
+            top: 100%;
+            left: 100%;
+            transition: all 0.7s;
+        }
+
+        .uiverse-button:hover {
+            color: #fff !important;
+            text-decoration: none;
+        }
+
+        .uiverse-button:hover:before {
+            top: -30px;
+            left: -30px;
+        }
+
+        .uiverse-button:active:before {
+            background: #3a0ca3;
+            transition: background 0s;
+        }
+
+        /* Estilos adicionales para mejorar la integración */
+        .hover-card {
+            transition: transform 0.3s ease;
+        }
+
+        .hover-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .icon-box {
+            margin-bottom: 1rem;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            padding: 2rem 0;
+        }

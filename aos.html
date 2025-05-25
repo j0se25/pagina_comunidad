@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AOS - Animaciones Súper Fáciles</title>
+    
+    <!-- 1. INCLUIR AOS (solo estas 2 líneas) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #005200 0%, #87CEEB 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Estilos básicos para tus secciones */
+        .hero {
+            text-align: center;
+            color: white;
+            padding: 100px 20px;
+            margin-bottom: 50px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.3em;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            margin: 50px 0;
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+        
+        .section h2 {
+            color: #005200;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .section p {
+            font-size: 1.1em;
+            color: #333;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .card {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            border-left: 5px solid #005200;
+        }
+        
+        .card h3 {
+            color: #005200;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+        
+        .features-section {
+            background: linear-gradient(45deg, #005200, #228B22);
+            color: white;
+        }
+        
+        .features-section h2 {
+            color: white;
+        }
+        
+        .features-section p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .features-section .card {
+            background: rgba(255, 255, 255, 0.1);
+            border-left: 5px solid #F0E68C;
+            backdrop-filter: blur(10px);
+        }
+        
+        .features-section .card h3 {
+            color: #F0E68C;
+        }
+        
+        .features-section .card p {
+            color: white;
+        }
+        
+        .cta-section {
+            background: linear-gradient(45deg, #8B4513, #CD853F);
+            color: white;
+            text-align: center;
+        }
+        
+        .cta-section h2 {
+            color: white;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #F0E68C;
+            color: #005200;
+            padding: 15px 30px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin: 20px 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .stat-number {
+            font-size: 3em;
+            font-weight: bold;
+            color: #F0E68C;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .implementation-box {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .implementation-box h3 {
+            color: #F0E68C;
+            margin-bottom: 20px;
+            font-family: Arial, sans-serif;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5em;
+            }
+            
+            .section {
+                padding: 30px 20px;
+                margin: 30px 0;
+            }
+            
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- SECCIÓN HERO -->
+    <div class="hero" data-aos="fade-down" data-aos-duration="1000">
+        <h1>AOS es Súper Fácil</h1>
+        <p>Solo añades un atributo HTML y listo. Sin CSS complicado, sin JavaScript complejo.</p>
+    </div>
+    
+    <div class="container">
+        <!-- SECCIÓN INTRODUCCIÓN -->
+        <div class="section" data-aos="fade-up" data-aos-duration="800">
+            <h2>¿Qué es AOS?</h2>
+            <p>Animate On Scroll es una librería que te permite animar elementos cuando aparecen en pantalla. Es perfecta para secciones completas y súper fácil de usar.</p>
+            
+            <div class="implementation-box">
+                <h3>🚀 Implementación en 3 pasos:</h3>
+                <div style="line-height: 2;">
+                    <strong>1. Incluir CSS y JS:</strong><br>
+                    &lt;link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"&gt;<br>
+                    &lt;script src="https://unpkg.com/aos@2.3.1/dist/aos.js"&gt;&lt;/script&gt;<br><br>
+                    
+                    <strong>2. Añadir atributos a tus secciones:</strong><br>
+                    &lt;section data-aos="fade-up"&gt;Mi contenido&lt;/section&gt;<br><br>
+                    
+                    <strong>3. Inicializar:</strong><br>
+                    &lt;script&gt;AOS.init();&lt;/script&gt;
+                </div>
+            </div>
+        </div>
+        
+        <!-- SECCIÓN TIPOS DE ANIMACIONES -->
+        <div class="section" data-aos="slide-right" data-aos-duration="1000">
+            <h2>Tipos de Animaciones</h2>
+            <p>Estas son las animaciones más útiles para secciones. Solo cambia el valor de data-aos:</p>
+            
+            <div class="cards-grid">
+                <div class="card" data-aos="fade-up" data-aos-delay="100">
+                    <h3>fade-up</h3>
+                    <p>Aparece desde abajo con opacidad. Perfecta para secciones principales.</p>
+                </div>
+                
+                <div class="card" data-aos="slide-left" data-aos-delay="200">
+                    <h3>slide-left</h3>
+                    <p>Entra desde la derecha. Ideal para contenido alternado.</p>
+                </div>
+                
+                <div class="card" data-aos="slide-right" data-aos-delay="300">
+                    <h3>slide-right</h3>
+                    <p>Entra desde la izquierda. Combina con slide-left.</p>
+                </div>
+                
+                <div class="card" data-aos="zoom-in" data-aos-delay="400">
+                    <h3>zoom-in</h3>
+                    <p>Efecto de zoom. Perfecto para elementos destacados.</p>
+                </div>
+                
+                <div class="card" data-aos="flip-left" data-aos-delay="500">
+                    <h3>flip-left</h3>
+                    <p>Volteo 3D. Para elementos que quieras que llamen la atención.</p>
+                </div>
+                
+                <div class="card" data-aos="fade-down" data-aos-delay="600">
+                    <h3>fade-down</h3>
+                    <p>Aparece desde arriba. Genial para títulos y héroes.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SECCIÓN CARACTERÍSTICAS -->
+        <div class="section features-section" data-aos="zoom-in-up" data-aos-duration="1200">
+            <h2>¿Por qué AOS es Perfecto?</h2>
+            <p>Es la solución más práctica para animar secciones sin complicaciones</p>
+            
+            <div class="stats-grid">
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+                    <span class="stat-number">2</span>
+                    <p>Líneas de código para incluir</p>
+                </div>
+                
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+                    <span class="stat-number">1</span>
+                    <p>Atributo HTML por elemento</p>
+                </div>
+                
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+                    <span class="stat-number">0</span>
+                    <p>CSS personalizado necesario</p>
+                </div>
+                
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="400">
+                    <span class="stat-number">30+</span>
+                    <p>Animaciones predefinidas</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SECCIÓN CONFIGURACIONES -->
+        <div class="section" data-aos="slide-up" data-aos-duration="1000">
+            <h2>Configuraciones Útiles</h2>
+            <p>Puedes personalizar las animaciones con estos atributos:</p>
+            
+            <div class="implementation-box">
+                <div style="line-height: 2.5;">
+                    <strong style="color: #F0E68C;">data-aos="fade-up"</strong> → Tipo de animación<br>
+                    <strong style="color: #87CEEB;">data-aos-duration="1000"</strong> → Duración en milisegundos<br>
+                    <strong style="color: #CD853F;">data-aos-delay="200"</strong> → Retraso antes de iniciar<br>
+                    <strong style="color: #228B22;">data-aos-once="true"</strong> → Animar solo una vez<br>
+                    <strong style="color: #F0E68C;">data-aos-offset="100"</strong> → Píxeles antes de activar
+                </div>
+            </div>
+            
+            <div class="cards-grid">
+                <div class="card" data-aos="fade-up" data-aos-duration="500">
+                    <h3>Rápida (500ms)</h3>
+                    <p>Para elementos que quieres que aparezcan rápido</p>
+                </div>
+                
+                <div class="card" data-aos="fade-up" data-aos-duration="1500">
+                    <h3>Lenta (1500ms)</h3>
+                    <p>Para efectos más dramáticos y elegantes</p>
+                </div>
+                
+                <div class="card" data-aos="fade-up" data-aos-delay="500">
+                    <h3>Con Retraso</h3>
+                    <p>Aparece 500ms después del trigger</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SECCIÓN EJEMPLO PRÁCTICO -->
+        <div class="section" data-aos="flip-up" data-aos-duration="1000">
+            <h2>Ejemplo para Tu Sitio</h2>
+            <p>Así quedaría tu HTML con AOS implementado:</p>
+            
+            <div class="implementation-box">
+                <h3>Tu HTML quedaría así:</h3>
+                <div style="color: #e2e8f0; line-height: 1.8;">
+&lt;!-- Header/Hero --&gt;<br>
+&lt;section data-aos="fade-down" data-aos-duration="1000"&gt;<br>
+&nbsp;&nbsp;&lt;h1&gt;Mi Título Principal&lt;/h1&gt;<br>
+&lt;/section&gt;<br><br>
+
+&lt;!-- Sección About --&gt;<br>
+&lt;section data-aos="fade-up" data-aos-duration="800"&gt;<br>
+&nbsp;&nbsp;&lt;h2&gt;Sobre Nosotros&lt;/h2&gt;<br>
+&nbsp;&nbsp;&lt;p&gt;Contenido...&lt;/p&gt;<br>
+&lt;/section&gt;<br><br>
+
+&lt;!-- Sección Services --&gt;<br>
+&lt;section data-aos="slide-left" data-aos-duration="1000"&gt;<br>
+&nbsp;&nbsp;&lt;h2&gt;Servicios&lt;/h2&gt;<br>
+&nbsp;&nbsp;&lt;div class="cards"&gt;...&lt;/div&gt;<br>
+&lt;/section&gt;<br><br>
+
+&lt;!-- Contact --&gt;<br>
+&lt;section data-aos="zoom-in" data-aos-duration="800"&gt;<br>
+&nbsp;&nbsp;&lt;h2&gt;Contacto&lt;/h2&gt;<br>
+&lt;/section&gt;
+                </div>
+            </div>
+        </div>
+        
+        <!-- CALL TO ACTION -->
+        <div class="section cta-section" data-aos="fade-up" data-aos-duration="1000">
+            <h2>¡Empezar es Súper Fácil!</h2>
+            <p>Solo copia estas líneas en tu HTML y añade los atributos data-aos</p>
+            
+            <div class="implementation-box" style="text-align: left; margin: 30px 0;">
+                <div style="color: #F0E68C; font-size: 1.1em;">
+&lt;!-- En el &lt;head&gt; --&gt;<br>
+&lt;link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"&gt;<br><br>
+
+&lt;!-- Antes de cerrar &lt;/body&gt; --&gt;<br>
+&lt;script src="https://unpkg.com/aos@2.3.1/dist/aos.js"&gt;&lt;/script&gt;<br>
+&lt;script&gt;AOS.init();&lt;/script&gt;
+                </div>
+            </div>
+            
+            <a href="#" class="btn" data-aos="bounce-in" data-aos-delay="200">¡Implementar AOS!</a>
+        </div>
+    </div>
+    
+    <!-- 2. INCLUIR AOS JAVASCRIPT -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- 3. INICIALIZAR AOS -->
+    <script>
+        AOS.init({
+            duration: 800,  // Duración por defecto
+            once: true,     // Animar solo una vez
+            offset: 100     // Trigger 100px antes
+        });
+    </script>
+</body>
+</html>
