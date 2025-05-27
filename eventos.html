@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eventos | Comunidad</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style_events.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+</head>
+
+<body class="bg-light">
+
+    <main>
+        <!-- Sección de encabezado -->
+        <section class="container pt-4">
+            <div class="border p-4 bg-white rounded-4 shadow-sm">
+                <h1 class="text-center display-4 fw-bold" style="color: #005200;">Eventos de la Comunidad</h1>
+                <p class="text-justify px-3">Conoce los eventos que hemos realizado y los que están por venir. Nuestra
+                    comunidad se fortalece con cada actividad, celebración y encuentro que compartimos juntos.</p>
+            </div>
+        </section>
+
+        <!-- Sección de tarjetas de eventos -->
+        <section class="container my-5">
+            <h3 class="text-center display-5 fw-bold" style="color: #228B22;">Principales Eventos</h3>
+            <div class="row g-4 text-center">
+                <div class="col-auto col-lg-6">
+                    <div class="card h-100 border-0 shadow-sm text-center">
+                        <img src="img/sahagun.jpg"
+                            class="card-img-top img-fluid" alt="Asamblea General" />
+                        <div class="card-body">
+                            <h5 class="card-title">Asamblea General</h5>
+                            <p class="text-muted mb-1"><i class="fas fa-calendar-alt"></i>Segundo Domingo de cada mes</p>
+                            <p class="card-text">Reunión para evaluar los avances mes a mes y planificar nuevas
+                                metas colectivas.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Evento 2 -->
+                <div class="col-auto col-lg-6">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <img src="img/sahagun.jpg"
+                            class="card-img-top img-fluid" alt="Encuentro Juvenil" />
+                        <div class="card-body">
+                            <h5 class="card-title">Encuentro Juvenil</h5>
+                            <p class="text-muted mb-1"><i class="fas fa-calendar-alt"></i>Segundo sábado de cada mes</p>
+                            <p class="card-text">Espacio para que los jóvenes compartan ideas, propongan proyectos y
+                                fortalezcan su liderazgo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container pt-4 mb-3">
+    <h3 class="text-center display-5 fw-bold mb-4" style="color: #CD853F;">
+        <i class="fas fa-calendar-alt me-2"></i>Nuestro Calendario
+    </h3>
+    <div class="border p-4 bg-white rounded-4 shadow-sm mb-3">
+
+        <div class="calendar-controls d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center mb-4 g-3">
+
+            <div class="month-nav d-flex align-items-center justify-content-between w-100 mb-2 mb-sm-0 mr-2">
+                <button class="btn btn-sm" id="prevMonth" style="background-color: #228B22;"> <i class="fas fa-chevron-left text-light"></i> <span class="d-none d-sm-inline text-light">Anterior</span> </button>
+                <div class="current-month fw-semibold text-center mx-1 fs-6 fs-sm-5" id="currentMonth">Mayo 2025</div>
+                <button class="btn btn-sm" id="nextMonth" style="background-color: #228B22;"> <span class="d-none d-sm-inline text-light">Siguiente</span> <i class="fas fa-chevron-right text-light"></i> </button>
+            </div>
+
+            <div class="view-toggle btn-group w-50 mt-2 mt-sm-0 g-1 m-2" role="group" aria-label="Selector de vista">
+                <button type="button" class="btn btn-sm active m-2" style="background-color: #CD853F;"> 
+                    <i class="fas fa-calendar me-1 text-light"></i>
+                    <span class="d-none d-sm-inline text-light">Calendario</span>
+                </button>
+                <button type="button" class="btn btn-sm m-2" style="background-color: #CD853F;"> 
+                    <i class="fas fa-list me-1 text-light"></i>
+                    <span class="d-none d-sm-inline text-light">Lista</span>
+                </button>
+            </div>
+        </div>
+
+        <div id="loadingMsg" class="loading alert alert-info d-none"> <i class="fas fa-spinner fa-spin me-2"></i>Cargando eventos...
+        </div>
+
+        <div id="errorMsg" class="error alert alert-danger" style="display: none;">
+            <i class="fas fa-exclamation-triangle me-2"></i>Error al cargar los eventos. Por favor, intenta de nuevo más tarde.
+        </div>
+
+        <div id="calendarContainer" class="container-fluid" style="display: none;">
+            <div class="calendar-grid" id="calendarGrid"></div>
+        </div>
+
+        <div id="eventsListContainer" class="events-list">
+            <div id="eventsList"></div>
+        </div>
+    </div>
+</section>
+    </main>
+
+    <!-- Modal para detalles del evento -->
+    <div id="eventModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+<script src="js/events.js"></script>
+</body>
+
+</html>

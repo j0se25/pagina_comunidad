@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario de Eventos Responsivo</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --verde-ceiba: #005200;
+            --azul-celeste: #87CEEB;
+            --amarillo-claro: #F0E68C;
+            --cafe-tierra: #8B4513;
+            --verde-secundario: #228B22;
+            --ocre-dorado: #CD853F;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .calendar-header {
+            background: linear-gradient(135deg, var(--verde-ceiba) 0%, var(--verde-secundario) 100%);
+            color: white;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 82, 0, 0.3);
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .current-month {
+            font-size: clamp(1.2rem, 4vw, 2rem);
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .toggle-btn {
+            background: var(--cafe-tierra);
+            border: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .toggle-btn.active {
+            background: var(--ocre-dorado);
+            transform: scale(1.05);
+        }
+
+        .toggle-btn:hover {
+            background: var(--ocre-dorado);
+            transform: translateY(-2px);
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 2px;
+            background: #dee2e6;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .day-header {
+            background: linear-gradient(135deg, var(--verde-ceiba) 0%, var(--verde-secundario) 100%);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            font-weight: 600;
+            font-size: clamp(0.8rem, 2vw, 1rem);
+        }
+
+        .day-cell {
+            background: white;
+            min-height: 100px;
+            padding: 0.5rem;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .day-cell:hover {
+            background: var(--amarillo-claro);
+            transform: scale(1.02);
+            border-color: var(--verde-secundario);
+        }
+
+        .day-cell.other-month {
+            background: #f8f9fa;
+            color: #6c757d;
+        }
+
+        .day-cell.today {
+            background: linear-gradient(135deg, var(--azul-celeste) 0%, #b3e0ff 100%);
+            color: var(--verde-ceiba);
+            font-weight: bold;
+            border: 2px solid var(--verde-ceiba);
+        }
+
+        .day-number {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+        }
+
+        .event-item {
+            background: linear-gradient(135deg, var(--verde-secundario) 0%, #32cd32 100%);
+            color: white;
+            padding: 0.125rem 0.375rem;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            margin: 0.125rem 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .event-item:hover {
+            background: linear-gradient(135deg, var(--ocre-dorado) 0%, #daa520 100%);
+            transform: scale(1.05);
+        }
+
+        .event-card {
+            background: white;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .event-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .event-date-calendar {
+            background: linear-gradient(135deg, var(--verde-ceiba) 0%, var(--verde-secundario) 100%);
+            color: white;
+            padding: 0.75rem 1rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .event-title-calendar {
+            font-size: 1.3rem;
+            color: var(--verde-ceiba);
+            font-weight: 700;
+            margin: 1rem 0 0.5rem 0;
+        }
+
+        .event-description-calendar {
+            color: var(--cafe-tierra);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .event-location-calendar {
+            color: var(--verde-secundario);
+            font-weight: 600;
+        }
+
+        .modal-content {
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .loading, .error {
+            padding: 3rem;
+            text-align: center;
+            font-size: 1.2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+        }
+
+        .loading {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            color: var(--verde-ceiba);
+        }
+
+        .error {
+            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+            color: var(--cafe-tierra);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .day-cell {
+                min-height: 70px;
+                padding: 0.25rem;
+            }
+            
+            .event-item {
+                font-size: 0.6rem;
+                padding: 0.1rem 0.25rem;
+            }
+            
+            .day-number {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .calendar-grid {
+                gap: 1px;
+            }
+            
+            .day-cell {
+                min-height: 60px;
+                padding: 0.2rem;
+            }
+            
+            .day-header {
+                padding: 0.5rem 0.25rem;
+                font-size: 0.7rem;
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--verde-secundario);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--verde-ceiba);
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid px-2 px-md-4">
+        <!-- Header del Calendario -->
+        <div class="calendar-header p-4 mt-4">
+            <div class="row align-items-center">
+                <div class="col-12 col-md-4 mb-3 mb-md-0">
+                    <div class="d-flex justify-content-center justify-content-md-start">
+                        <button id="prevMonth" class="btn nav-btn me-2">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button id="nextMonth" class="btn nav-btn">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="col-12 col-md-4 mb-3 mb-md-0">
+                    <div id="currentMonth" class="current-month text-center"></div>
+                </div>
+                
+                <div class="col-12 col-md-4">
+                    <div class="d-flex justify-content-center justify-content-md-end">
+                        <button id="calendarView" class="btn toggle-btn active me-2">
+                            <i class="fas fa-calendar-alt me-1"></i>
+                            <span class="d-none d-sm-inline">Calendario</span>
+                        </button>
+                        <button id="listView" class="btn toggle-btn">
+                            <i class="fas fa-list me-1"></i>
+                            <span class="d-none d-sm-inline">Lista</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mensaje de carga -->
+        <div id="loadingMsg" class="loading">
+            <div class="spinner-border text-success me-3" role="status">
+                <span class="visually-hidden">Cargando...</span>
+            </div>
+            Cargando eventos...
+        </div>
+
+        <!-- Mensaje de error -->
+        <div id="errorMsg" class="error d-none">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            Error al cargar los eventos. Por favor, intenta nuevamente.
+        </div>
+
+        <!-- Vista de Calendario -->
+        <div id="calendarContainer" class="d-none">
+            <div class="calendar-grid" id="calendarGrid"></div>
+        </div>
+
+        <!-- Vista de Lista -->
+        <div id="eventsListContainer" class="d-none">
+            <div class="row">
+                <div class="col-12">
+                    <div id="eventsList"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para detalles del evento -->
+    <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modalContent">
+                    <!-- Contenido del evento se insertará aquí -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        class CalendarioEventos {
+            constructor() {
+                this.eventos = [];
+                this.currentDate = new Date();
+                this.currentView = 'calendar';
+                this.meses = [
+                    'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                    'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+                ];
+                this.diasSemana = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+                
+                this.init();
+            }
+
+            async init() {
+                await this.cargarEventos();
+                this.setupEventListeners();
+                this.renderCalendario();
+                this.renderLista();
+            }
+
+            async cargarEventos() {
+                try {
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    
+                    this.eventos = [
+                        {
+                            id: 1,
+                            titulo: "Asamblea General Mensual",
+                            descripcion: "Reunión mensual de la comunidad para tratar temas importantes, evaluar proyectos en curso y tomar decisiones colectivas para el bienestar común.",
+                            fecha: "2025-06-08",
+                            hora: "09:00 AM",
+                            ubicacion: "Salón Principal",
+                            tipo: "comunitario"
+                        },
+                        {
+                            id: 2,
+                            titulo: "Festival de Cosecha",
+                            descripcion: "Celebración de agradecimiento por los frutos de la tierra. Incluye danzas tradicionales, música ancestral, artesanías y compartir comunitario.",
+                            fecha: "2025-06-15",
+                            hora: "10:00 AM",
+                            ubicacion: "Plaza Central",
+                            tipo: "festividad"
+                        },
+                        {
+                            id: 3,
+                            titulo: "Curso de Lengua Ancestral",
+                            descripcion: "Clases para preservar y transmitir nuestra lengua originaria a las nuevas generaciones. Impartido por los mayores de la comunidad.",
+                            fecha: "2025-06-20",
+                            hora: "16:00",
+                            ubicacion: "Aula Cultural",
+                            tipo: "educativo"
+                        },
+                        {
+                            id: 4,
+                            titulo: "Jornada de Siembra Comunitaria",
+                            descripcion: "Actividad colectiva de siembra en la huerta comunitaria. Participación de todas las familias para fortalecer la soberanía alimentaria.",
+                            fecha: "2025-05-30",
+                            hora: "08:00 AM",
+                            ubicacion: "Huerta Comunitaria",
+                            tipo: "ambiental"
+                        },
+                        {
+                            id: 5,
+                            titulo: "Taller de Artesanías Tradicionales",
+                            descripcion: "Actividad colectiva para aprender técnicas ancestrales de artesanías. Participación de todas las familias para preservar nuestras tradiciones culturales.",
+                            fecha: "2025-05-30",
+                            hora: "10:00 AM",
+                            ubicacion: "Centro Artesanal",
+                            tipo: "cultural"
+                        }
+                    ];
+
+                    document.getElementById('loadingMsg').classList.add('d-none');
+                    document.getElementById('calendarContainer').classList.remove('d-none');
+                } catch (error) {
+                    console.error('Error cargando eventos:', error);
+                    document.getElementById('loadingMsg').classList.add('d-none');
+                    document.getElementById('errorMsg').classList.remove('d-none');
+                }
+            }
+
+            setupEventListeners() {
+                document.getElementById('prevMonth').addEventListener('click', () => this.previousMonth());
+                document.getElementById('nextMonth').addEventListener('click', () => this.nextMonth());
+                document.getElementById('calendarView').addEventListener('click', () => this.switchView('calendar'));
+                document.getElementById('listView').addEventListener('click', () => this.switchView('list'));
+            }
+
+            previousMonth() {
+                this.currentDate.setMonth(this.currentDate.getMonth() - 1);
+                this.renderCalendario();
+            }
+
+            nextMonth() {
+                this.currentDate.setMonth(this.currentDate.getMonth() + 1);
+                this.renderCalendario();
+            }
+
+            switchView(view) {
+                this.currentView = view;
+                const calendarBtn = document.getElementById('calendarView');
+                const listBtn = document.getElementById('listView');
+                const calendarContainer = document.getElementById('calendarContainer');
+                const eventsListContainer = document.getElementById('eventsListContainer');
+
+                if (view === 'calendar') {
+                    calendarBtn.classList.add('active');
+                    listBtn.classList.remove('active');
+                    calendarContainer.classList.remove('d-none');
+                    eventsListContainer.classList.add('d-none');
+                } else {
+                    listBtn.classList.add('active');
+                    calendarBtn.classList.remove('active');
+                    calendarContainer.classList.add('d-none');
+                    eventsListContainer.classList.remove('d-none');
+                }
+            }
+
+            renderCalendario() {
+                const grid = document.getElementById('calendarGrid');
+                const monthDisplay = document.getElementById('currentMonth');
+                
+                monthDisplay.textContent = `${this.meses[this.currentDate.getMonth()]} ${this.currentDate.getFullYear()}`;
+                
+                grid.innerHTML = '';
+
+                // Headers de días
+                this.diasSemana.forEach(dia => {
+                    const dayHeader = document.createElement('div');
+                    dayHeader.className = 'day-header';
+                    dayHeader.innerHTML = `<i class="fas fa-calendar-day me-1 d-none d-sm-inline"></i>${dia}`;
+                    grid.appendChild(dayHeader);
+                });
+
+                // Calcular días del calendario
+                const firstDay = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), 1);
+                const lastDay = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() + 1, 0);
+                const startDate = new Date(firstDay);
+                startDate.setDate(startDate.getDate() - firstDay.getDay());
+
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+
+                for (let i = 0; i < 42; i++) {
+                    const cellDate = new Date(startDate);
+                    cellDate.setDate(startDate.getDate() + i);
+                    
+                    const dayCell = document.createElement('div');
+                    dayCell.className = 'day-cell';
+                    
+                    if (cellDate.getMonth() !== this.currentDate.getMonth()) {
+                        dayCell.classList.add('other-month');
+                    }
+                    
+                    if (cellDate.getTime() === today.getTime()) {
+                        dayCell.classList.add('today');
+                    }
+
+                    const dayNumber = document.createElement('div');
+                    dayNumber.className = 'day-number';
+                    dayNumber.textContent = cellDate.getDate();
+                    dayCell.appendChild(dayNumber);
+
+                    // Agregar eventos del día
+                    const dayEvents = this.getEventosDelDia(cellDate);
+                    dayEvents.forEach(evento => {
+                        const eventDiv = document.createElement('div');
+                        eventDiv.className = 'event-item';
+                        eventDiv.innerHTML = `<i class="fas fa-circle me-1" style="font-size: 4px;"></i>${evento.titulo}`;
+                        eventDiv.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            this.showEventModal(evento);
+                        });
+                        dayCell.appendChild(eventDiv);
+                    });
+
+                    grid.appendChild(dayCell);
+                }
+            }
+
+            renderLista() {
+                const listContainer = document.getElementById('eventsList');
+                listContainer.innerHTML = '';
+
+                if (this.eventos.length === 0) {
+                    listContainer.innerHTML = '<div class="text-center text-muted p-5">No hay eventos programados.</div>';
+                    return;
+                }
+
+                // Ordenar eventos por fecha
+                const eventosOrdenados = [...this.eventos].sort((a, b) => new Date(a.fecha) - new Date(b.fecha));
+
+                const row = document.createElement('div');
+                row.className = 'row g-4';
+
+                eventosOrdenados.forEach(evento => {
+                    const col = document.createElement('div');
+                    col.className = 'col-12 col-md-6 col-lg-4';
+                    
+                    const eventCard = document.createElement('div');
+                    eventCard.className = 'event-card h-100';
+                    
+                    const fecha = new Date(evento.fecha);
+                    const fechaFormateada = fecha.toLocaleDateString('es-ES', {
+                        weekday: 'long',
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    });
+
+                    const tipoIconos = {
+                        ceremonial: 'fas fa-moon',
+                        educativo: 'fas fa-book',
+                        comunitario: 'fas fa-users',
+                        festividad: 'fas fa-music',
+                        ambiental: 'fas fa-leaf',
+                        cultural: 'fas fa-palette'
+                    };
+
+                    const icono = tipoIconos[evento.tipo] || 'fas fa-calendar-alt';
+
+                    eventCard.innerHTML = `
+                        <div class="event-date-calendar">
+                            <i class="${icono} me-2"></i>${fechaFormateada} - ${evento.hora}
+                        </div>
+                        <div class="p-3">
+                            <div class="event-title-calendar">${evento.titulo}</div>
+                            <div class="event-description-calendar">${evento.descripcion}</div>
+                            <div class="event-location-calendar">
+                                <i class="fas fa-map-marker-alt me-2"></i>${evento.ubicacion}
+                            </div>
+                        </div>
+                    `;
+
+                    eventCard.addEventListener('click', () => this.showEventModal(evento));
+                    eventCard.style.cursor = 'pointer';
+                    
+                    col.appendChild(eventCard);
+                    row.appendChild(col);
+                });
+
+                listContainer.appendChild(row);
+            }
+
+            getEventosDelDia(date) {
+                const dateStr = date.toISOString().split('T')[0];
+                return this.eventos.filter(evento => evento.fecha === dateStr);
+            }
+
+            showEventModal(evento) {
+                const modalContent = document.getElementById('modalContent');
+                
+                const fecha = new Date(evento.fecha);
+                const fechaFormateada = fecha.toLocaleDateString('es-ES', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+
+                const tipoIconos = {
+                    ceremonial: 'fas fa-moon',
+                    educativo: 'fas fa-book',
+                    comunitario: 'fas fa-users',
+                    festividad: 'fas fa-music',
+                    ambiental: 'fas fa-leaf',
+                    cultural: 'fas fa-palette'
+                };
+
+                const icono = tipoIconos[evento.tipo] || 'fas fa-calendar-alt';
+
+                modalContent.innerHTML = `
+                    <div class="event-date-calendar mb-0">
+                        <i class="${icono} me-2"></i>${fechaFormateada} - ${evento.hora}
+                    </div>
+                    <div class="p-3">
+                        <div class="event-title-calendar">${evento.titulo}</div>
+                        <div class="event-description-calendar">${evento.descripcion}</div>
+                        <div class="event-location-calendar">
+                            <i class="fas fa-map-marker-alt me-2"></i>${evento.ubicacion}
+                        </div>
+                    </div>
+                `;
+
+                const modal = new bootstrap.Modal(document.getElementById('eventModal'));
+                modal.show();
+            }
+        }
+
+        // Inicializar el calendario cuando se carga la página
+        document.addEventListener('DOMContentLoaded', () => {
+            window.calendarioEventos = new CalendarioEventos();
+        });
+    </script>
+</body>
+</html>
