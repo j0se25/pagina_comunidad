@@ -1,8 +1,8 @@
 {
     "rewrites": [
     { "source": "/", "destination": "loadContent('index.html')" },
-    { "source": "/index", "destination": "/index.html" },
-    { "source": "/index/nosotros", "destination":"/quienes.html"},
+    { "source": "/index", "destination": "loadContent('index.html')" },
+    { "source": "/index/nosotros", "destination":"loadContent('quienes.html')"},
     { "source": "/index/cultura", "destination": "/cultura.html"},
     { "source": "/index/artesanias", "destination": "artesanias.html"},
     { "source": "/index/eventos", "destination": "/eventos.html" }
