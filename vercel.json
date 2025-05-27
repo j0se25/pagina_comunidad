@@ -1,6 +1,6 @@
 {
     "rewrites": [
-    { "source": "/", "destination": "/index.html" },
+    { "source": "/", "destination": "loadContent('index.html')" },
     { "source": "/index", "destination": "/index.html" },
     { "source": "/index/nosotros", "destination":"/quienes.html"},
     { "source": "/index/cultura", "destination": "/cultura.html"},

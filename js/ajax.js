@@ -99,10 +99,6 @@ function loadExternalScripts(doc) {
 
 // Función para limpiar recursos cuando se cambia de página
 function cleanupResources() {
-    // Limpiar event listeners específicos de la página anterior
-    // Detener timers, intervals, etc.
-    
-    // Ejemplo para el calendario de eventos:
     if (window.calendarioEventos) {
         // Si hay métodos de limpieza, llamarlos aquí
         window.calendarioEventos = null;
